@@ -1,0 +1,19 @@
+{:deps {:aliases [:dev]}
+
+ :nrepl
+ {:port  3333
+  :nrepl {:middleware [refactor-nrepl.middleware/wrap-refactor]}}
+
+ :builds
+ {:script {:target     :node-library
+           :output-to  "out/main.js"
+           ;; :entries    [uniorg-util]
+           :exports-fn uniorg-util/-main
+           :main       uniorg-util/-main
+
+           ;; :release {:compiler-options {:optimizations     :simple
+           ;;                              :variable-renaming :off
+           ;;                              :property-renaming :off
+           ;;                              :pretty-print      true
+           ;;                              :source-map        true}}
+           }}}

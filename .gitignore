@@ -1,0 +1,10 @@
+.cpcache/
+.shadow-cljs/
+.calva/
+.dir-locals.el
+
+node_modules/
+package-lock.json
+
+json-data/
+out/
