@@ -14,8 +14,8 @@
 ;;   [["-o" "--output" "Directory to output to"
 ;;     :default "."]
 ;;    ["-e" "--edn" "Output files as edn instead of json"
-;;     :default :false
-;;     :update-fn :true]
+;;     :default false
+;;     :update-fn true]
 ;;    ["-h" "--help"]])
 
 ;; (defn usage [options-summary]
@@ -92,28 +92,35 @@
       js/JSON.stringify))
 
 (defn gen-all-posts
-  [out-path files extension]
+  [out-path files extension json?]
   (doseq [file files]
     (spit (str out-path "/" (get-id file) extension)
-          (jsonify file))))
+          (cond-> file
+            json? jsonify))))
 
 (defn gen-list-of-posts
-  [out-path files extension]
+  [out-path files extension json?]
   (spit (str out-path "/_ALL_POSTS" extension)
-        (jsonify (for [file files]
-                   (get-id file)))))
+        (cond-> (for [file files]
+                  (get-id file))
+          json? jsonify)))
 
-(defn create-files [in-path out-path]
-  (doall
-    (create-out-dir out-path)
-    (let [input     (rest (file-seq in-path))
-          files     (map blog-post input)
-          extension ".json"]
-      (gen-all-posts out-path files extension)
-      (gen-list-of-posts out-path files extension))))
+(defn create-files [in-path out-path json?]
+  (create-out-dir out-path)
+  (let [input     (rest (file-seq in-path))
+        files     (map blog-post input)
+        extension (if json? ".json" ".edn")]
+    (doall
+      (gen-all-posts out-path files extension json?)
+      (gen-list-of-posts out-path files extension json?))))
 
-(defn ^:export -main
-  [in-path out-path]
-  (create-files in-path out-path))
-
-;; (-main "test-posts" "json-data")
+(defn ^:export -main "
+  Set `json?` to `false` for edn output.
+  Both `in-path` and `out-path` take strings
+  without trailing slashes as file paths."
+  ([in-path out-path]
+   (create-files in-path out-path true))
+  ([in-path out-path json?]
+   (if json?
+     (create-files in-path out-path true)
+     (create-files in-path out-path false))))
