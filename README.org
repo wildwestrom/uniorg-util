@@ -8,6 +8,7 @@ Outputs to json.
 
 ** To be implemented:
  - Make a command line interface. Currently just an API accessible via CLI.
+ - Publish on NPM, so I can do ~npm install uniorg-util~ and ~uniorg-util [in-dir] [out-dir]~.
 
 * License
   This program converts your org-mode files into html + metadata.\\
