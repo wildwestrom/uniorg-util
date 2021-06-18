@@ -10,7 +10,7 @@ Outputs to json.
  - Make a command line interface. Currently just an API accessible via CLI.
 
 * License
-  This program converts your org-mode files into html + metadata.
+  This program converts your org-mode files into html + metadata.\\
   Copyright © 2021 Christian Westrom
 
   This program is free software: you can redistribute it and/or modify it
