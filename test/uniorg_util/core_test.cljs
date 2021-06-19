@@ -17,14 +17,16 @@
   (let [file-ext-test
         (fn [json? ext test-type]
             (sut/create-files test-in-dir test-out-dir json?)
-            (let [dirs (h/files-in-dir test-out-dir)]
-              (testing (str "when `json?` is `" json? "`, output to `" ext "`.")
+            (let [dirs      (h/files-in-dir test-out-dir)
+                  is-or-not (cond (= '=    test-type) "is"
+                                  (= 'not= test-type) "is not")]
+              (testing (str "when `json?` " is-or-not " `" json? "`, output to `" ext "`.")
                 (is (test-type (h/filter-ext dirs ext) dirs))))
             (cleanup test-out-dir))]
-    (file-ext-test true  ".json" =)
-    (file-ext-test false ".edn"  =)
-    (file-ext-test true  ".edn"  not=)
-    (file-ext-test false ".json" not=)))
+    (file-ext-test true  ".json" '=)
+    (file-ext-test false ".edn"  '=)
+    (file-ext-test true  ".edn"  'not=)
+    (file-ext-test false ".json" 'not=)))
 
 (defn valid-json?
   [str]

@@ -1,9 +1,8 @@
-#+title: Lorem Ipsum
+#+title: No id field
 #+subtitle: stuff test
 #+date: 2021-04-15
 #+tags: test
 #+author: Christian Westrom
-#+id: test-2
 
 * Here's some stuff
   * Here's more stuff

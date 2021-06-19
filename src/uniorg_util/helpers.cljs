@@ -11,7 +11,7 @@
   Returns strings."
   [path]
   (let [p (fs/realpath path)]
-    (map #(str p "/" %) (fs/readdir p))))
+    (map #(str % "/" p) (fs/readdir p))))
 
 
 (defn filter-ext

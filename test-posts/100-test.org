@@ -1,4 +1,4 @@
-#+title: Lorem Ipsum
+#+title: Everything ok here
 #+subtitle: stuff test
 #+date: 2021-04-15
 #+tags: test
