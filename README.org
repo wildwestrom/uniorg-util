@@ -3,8 +3,21 @@
 This program converts your org-mode files into html + metadata.
 Outputs to json.
 
+** Usage:
+   To run, paste into the command line.\\
+   Outputs json by default.
+   #+begin_src shell
+     node main.js [IN-DIR] [OUT-DIR]
+   #+end_src
+
+   Add ~false~ to output files as edn.
+   #+begin_src shell
+     node main.js [IN-DIR] [OUT-DIR] false
+   #+end_src
+
 ** Known issues:
  - If an org-document has the same id, it creates a single file, not sure what other undefined behavior it has.
+ - If an org-document has no id field, I don't know what happens.
 
 ** To be implemented:
  - Make a command line interface. Currently just an API accessible via CLI.

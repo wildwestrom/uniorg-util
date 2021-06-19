@@ -5,11 +5,11 @@
   :nrepl {:middleware [refactor-nrepl.middleware/wrap-refactor]}}
 
  :builds
- {:script {:target     :node-library
-           :output-to  "out/main.js"
+ {:script {:target     :node-script
+           :output-to  "main.js"
            ;; :entries    [uniorg-util]
-           :exports-fn uniorg-util/-main
-           :main       uniorg-util/-main
+           :exports-fn uniorg-util.core/create-files
+           :main       uniorg-util.core/main
 
            ;; :release {:compiler-options {:optimizations     :simple
            ;;                              :variable-renaming :off

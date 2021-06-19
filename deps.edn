@@ -1,6 +1,7 @@
 {:paths ["src"]
 
- :deps {cljs-node-io/cljs-node-io {:mvn/version "1.1.2"}}
+ :deps {cljs-node-io/cljs-node-io {:mvn/version "1.1.2"}
+        org.clojure/tools.cli     {:mvn/version "1.0.206"}}
 
  :aliases {:dev {:extra-deps
                  {thheller/shadow-cljs          {:mvn/version "2.14.5"}
