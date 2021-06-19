@@ -16,7 +16,7 @@ Outputs to json.
    #+end_src
 
 ** Known issues:
- - If an org-document has the same id, it creates a single file, not sure what other undefined behavior it has.
+ - If an org-document has the same fields or filenames, it creates a single file, not sure what other undefined behavior it has.
  - If an org-document has no id field, I don't know what happens.
 
 ** To be implemented:

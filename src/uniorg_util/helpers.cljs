@@ -10,11 +10,13 @@
   "Like `file-seq` but not recursive.
   Returns strings."
   [path]
-  (filter fs/file? (fs/readdir ".")))
+  (let [p (fs/realpath path)]
+    (map #(str p "/" %) (fs/readdir p))))
 
-(defn filter-for-org-documents
-  [files]
-  (filter #(-> % fs/ext (= ".org"))
+
+(defn filter-ext
+  [files ext]
+  (filter #(-> % fs/ext (= ext))
           files))
 
 (defn remove-extension

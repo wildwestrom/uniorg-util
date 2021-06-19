@@ -58,7 +58,7 @@
                 (get-from-meta file :title)
                 (get-from-meta file :original-filename))))))
 
-(defn- jsonify [file]
+(defn jsonify [file]
   (-> file
       clj->js
       js/JSON.stringify))
@@ -85,7 +85,7 @@
 
 (defn create-files [in-path out-path json?]
   (create-out-dir out-path)
-  (let [input     (h/filter-for-org-documents (h/files-in-dir in-path))
+  (let [input     (h/filter-ext (h/files-in-dir in-path) ".org")
         files     (map #(assoc (blog-post %) :meta
                                (conj (:meta (blog-post %))
                                      {:original-filename (h/remove-extension %)})) input)

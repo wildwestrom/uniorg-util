@@ -7,6 +7,7 @@
     },
     "scripts": {
         "build": "shadow-cljs release script",
+        "test": "shadow-cljs compile test && node node-tests.js",
         "watch": "shadow-cljs watch script"
     },
     "devDependencies": {

@@ -9,11 +9,8 @@
            :output-to  "main.js"
            ;; :entries    [uniorg-util]
            :exports-fn uniorg-util.core/create-files
-           :main       uniorg-util.core/main
-
-           ;; :release {:compiler-options {:optimizations     :simple
-           ;;                              :variable-renaming :off
-           ;;                              :property-renaming :off
-           ;;                              :pretty-print      true
-           ;;                              :source-map        true}}
-           }}}
+           :main       uniorg-util.core/main}
+  :test   {:target    :node-test
+           :output-to "node-tests.js"
+           :ns-regexp "-test$"
+           :autorun   true}}}

@@ -1,15 +1,17 @@
-.cpcache/
-.shadow-cljs/
-.calva/
+/.cpcache/
+/.shadow-cljs/
+/.calva/
+/.lsp/
 .dir-locals.el
 .nrepl-port
 
-node_modules/
+/node_modules/
 package-lock.json
 yarn.lock
 
 json-data/
 edn-data/
+test-output/
 out/
 
 .DS_Store
