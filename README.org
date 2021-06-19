@@ -3,6 +3,9 @@
 This program converts your org-mode files into html + metadata.\\
 Outputs to both json and edn formats.
 
+It relies heavily on @rasendubi's very accurate org-mode parser, *uniorg*.\\
+https://github.com/rasendubi/uniorg
+
 ** Usage:
    To run, paste into the command line.\\
    Outputs json by default.
@@ -21,8 +24,8 @@ Outputs to both json and edn formats.
 
 ** TODO Features to be implemented:
 *** TODO Figure out CI/CD.
-    This project should test before committing or accepting pull requests.
-    This project should build, test, and deploy to npm on commit.
+    This project should test before committing or accepting pull requests.\\
+    This project should also build, test, and deploy to npm on commit.
 *** TODO Make into a polished command line tool.
     Currently just an API accessible via CLI.
 *** TODO Publish on NPM,
