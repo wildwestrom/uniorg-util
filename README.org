@@ -20,6 +20,9 @@ Outputs to both json and edn formats.
     Not sure what other undefined behavior it has.
 
 ** TODO Features to be implemented:
+*** TODO Figure out CI/CD.
+    This project should test before committing or accepting pull requests.
+    This project should build, test, and deploy to npm on commit.
 *** TODO Make into a polished command line tool.
     Currently just an API accessible via CLI.
 *** TODO Publish on NPM,
