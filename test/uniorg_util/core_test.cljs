@@ -3,7 +3,7 @@
             [uniorg-util.helpers :as h]
             [cljs-node-io.fs :as fs]
             [cljs.reader :as reader]
-            [cljs.test :refer-macros [deftest testing is are]]))
+            [cljs.test :refer-macros [deftest testing is]]))
 
 (def test-in-dir "test-posts")
 (def test-out-dir "test-output")
@@ -53,4 +53,4 @@
             (sut/apply-jsonify? false clojure-map))))
     ))
 
-#_(cljs.test/run-all-tests)
+;; TODO: Add test for the CLI.

@@ -38,6 +38,7 @@
   (println msg)
   (.exit js/process status))
 
+;; TODO: Finish CLI
 ;; (defn ^:export main
 ;;   []
 ;;   ())

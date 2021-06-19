@@ -1,7 +1,7 @@
 * Uniorg Utility
 
-This program converts your org-mode files into html + metadata.
-Outputs to json.
+This program converts your org-mode files into html + metadata.\\
+Outputs to both json and edn formats.
 
 ** Usage:
    To run, paste into the command line.\\
@@ -16,12 +16,12 @@ Outputs to json.
    #+end_src
 
 ** Known issues:
- - If an org-document has the same fields or filenames, it creates a single file, not sure what other undefined behavior it has.
- - If an org-document has no id field, I don't know what happens.
+*** FIXME If an org-document has the same fields or filenames, it creates a single file.
+    Not sure what other undefined behavior it has.
 
-** To be implemented:
- - Make a command line interface. Currently just an API accessible via CLI.
- - Publish on NPM, so I can do ~npm install uniorg-util~ and ~uniorg-util [in-dir] [out-dir]~.
+** TODO Features to be implemented:
+*** TODO Make a command line interface. Currently just an API accessible via CLI.
+*** TODO Publish on NPM, so I can do ~npm install uniorg-util~ and ~uniorg-util [in-dir] [out-dir]~.
 
 * License
   This program converts your org-mode files into html + metadata.\\
