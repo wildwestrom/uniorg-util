@@ -15,13 +15,15 @@ Outputs to both json and edn formats.
      node main.js [IN-DIR] [OUT-DIR] false
    #+end_src
 
-** Known issues:
-*** FIXME If an org-document has the same fields or filenames, it creates a single file.
+** TODO Known issues:
+*** TODO If an org-document has the same fields or filenames, it creates a single file.
     Not sure what other undefined behavior it has.
 
 ** TODO Features to be implemented:
-*** TODO Make a command line interface. Currently just an API accessible via CLI.
-*** TODO Publish on NPM, so I can do ~npm install uniorg-util~ and ~uniorg-util [in-dir] [out-dir]~.
+*** TODO Make into a polished command line tool.
+    Currently just an API accessible via CLI.
+*** TODO Publish on NPM,
+    I'd like to just do ~npm install uniorg-util~ and ~uniorg-util [in-dir] [out-dir]~.
 
 * License
   This program converts your org-mode files into html + metadata.\\
