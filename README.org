@@ -3,8 +3,7 @@
 This program converts your org-mode files into html + metadata.\\
 Outputs to both json and edn formats.
 
-It relies heavily on @rasendubi's very accurate org-mode parser, *uniorg*.\\
-https://github.com/rasendubi/uniorg
+It relies heavily on [[https://github.com/rasendubi][rasendubi]]'s very accurate org-mode parser, *[[https://github.com/rasendubi/uniorg][uniorg]]*.\\
 
 ** Usage:
    To run, paste into the command line.\\
