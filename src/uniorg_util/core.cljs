@@ -97,14 +97,3 @@
        (gen-all-posts out-path files extension json?)
        (when manifest
          (gen-list-of-posts out-path files extension json? manifest))))))
-
-(defn ^:export main "
-  Set `json?` to `false` for edn output.
-  Both `in-path` and `out-path` take strings
-  without trailing slashes as file paths."
-  ([in-path out-path]
-   (main in-path out-path true))
-  ([in-path out-path json?]
-   (create-files in-path out-path json? "_ALL_FILES"))
-  ([in-path out-path json? manifest]
-   (create-files in-path out-path json? manifest)))

@@ -10,11 +10,10 @@
    ["-o" "--output" "Directory to output to"
     :default "."]
    ["-e" "--edn" "Output files as edn instead of json"
+    :default false]
+   ["-m" "--manifest" "Create a list of all-files processed."
     :default false
-    :flag true]
-   ["-m " "--generate-manifest" "Create a list of all-files processed."
-    :default nil
-    :parse-opts ""]
+    :parse-fn str]
    ["-h" "--help"]])
 
 (defn- usage [options-summary]
@@ -43,13 +42,11 @@
   (println msg)
   (.exit js/process status))
 
-;; (defn ^:export main
-;;   []
-;;   ())
-
-(comment
-  ["uniorg-util" "should output to json"]
-  (core/create-files "." "." )
-
-
-  )
+;; (defn -main [& args]
+;;   (let [{:keys [action options exit-message ok?]} (validate-args args)]
+;;     (if exit-message
+;;       (exit (if ok? 0 1) exit-message)
+;;       (case action
+;;         "start"  (println action)
+;;         "stop"   (println action)
+;;         "status" (println action)))))

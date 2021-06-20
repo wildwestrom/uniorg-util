@@ -13,8 +13,9 @@
   (when (fs/dir? path)
     (fs/rm-r path)))
 
-(deftest does-remove-extension-work?
+(deftest remove-extension
   (is (= (h/remove-extension "~/.config/README.org") "README")))
+
 
 (defn file-ext-test
   [json? test-type ext]
@@ -28,18 +29,19 @@
                      dirs))))
   (cleanup test-out-dir))
 
-(deftest do-file-extensions-match?
+(deftest file-extensions
   (file-ext-test true  '=    ".json")
   (file-ext-test false '=    ".edn")
   (file-ext-test true  'not= ".edn")
   (file-ext-test false 'not= ".json"))
 
-(deftest are-all-posts-generated?
+(deftest all-posts-generated
   (testing "Each input file corresponds to an output file when generating the posts."
-    (do (sut/create-files test-in-dir test-out-dir true false)
-        (is (= (count (h/files-in-dir test-in-dir))
-               (count (h/files-in-dir test-out-dir)))))
-    (cleanup test-out-dir)))
+    (do
+      (sut/create-files test-in-dir test-out-dir true nil)
+      (is (= (count (h/files-in-dir test-in-dir))
+             (count (h/files-in-dir test-out-dir))))
+      (cleanup test-out-dir))))
 
 (defn valid-json?
   [str]
@@ -55,7 +57,7 @@
     (catch js/Object e false))
   true)
 
-(deftest do-maps-become-json?
+(deftest jsonify-creates-valid-json
   (let [clojure-map {:keyword :kw
                      :list    '("here" "is" "some")
                      :vec     [1 2 3 4 "fuckerfuck"]
@@ -66,5 +68,3 @@
     (testing "is the output valid edn?"
       (is (valid-edn?
             (sut/apply-jsonify? false clojure-map))))))
-
-;; TODO: Add test for the CLI.
