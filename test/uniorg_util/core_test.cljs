@@ -10,23 +10,36 @@
 
 (defn cleanup
   [path]
-    (when (fs/dir? path)
-      (fs/rm-r path)))
+  (when (fs/dir? path)
+    (fs/rm-r path)))
 
-(deftest file-extensions
-  (let [file-ext-test
-        (fn [json? ext test-type]
-            (sut/create-files test-in-dir test-out-dir json?)
-            (let [dirs      (h/files-in-dir test-out-dir)
-                  is-or-not (cond (= '=    test-type) "is"
-                                  (= 'not= test-type) "is not")]
-              (testing (str "when `json?` " is-or-not " `" json? "`, output to `" ext "`.")
-                (is (test-type (h/filter-ext dirs ext) dirs))))
-            (cleanup test-out-dir))]
-    (file-ext-test true  ".json" '=)
-    (file-ext-test false ".edn"  '=)
-    (file-ext-test true  ".edn"  'not=)
-    (file-ext-test false ".json" 'not=)))
+(deftest does-remove-extension-work?
+  (is (= (h/remove-extension "~/.config/README.org") "README")))
+
+(defn file-ext-test
+  [json? test-type ext]
+  (sut/create-files test-in-dir test-out-dir json? false)
+  (let [dirs      (h/files-in-dir test-out-dir)
+        is-or-not (condp = test-type
+                    '=    "is"
+                    'not= "is not")]
+    (testing (str "when `json?` " is-or-not " `" json? "`, output to `" ext "`.")
+      (is (test-type (h/filter-ext dirs ext)
+                     dirs))))
+  (cleanup test-out-dir))
+
+(deftest do-file-extensions-match?
+  (file-ext-test true  '=    ".json")
+  (file-ext-test false '=    ".edn")
+  (file-ext-test true  'not= ".edn")
+  (file-ext-test false 'not= ".json"))
+
+(deftest are-all-posts-generated?
+  (testing "Each input file corresponds to an output file when generating the posts."
+    (do (sut/create-files test-in-dir test-out-dir true false)
+        (is (= (count (h/files-in-dir test-in-dir))
+               (count (h/files-in-dir test-out-dir)))))
+    (cleanup test-out-dir)))
 
 (defn valid-json?
   [str]
@@ -42,17 +55,16 @@
     (catch js/Object e false))
   true)
 
-(deftest jsonification
+(deftest do-maps-become-json?
   (let [clojure-map {:keyword :kw
                      :list    '("here" "is" "some")
                      :vec     [1 2 3 4 "fuckerfuck"]
                      :regex   #"assbags"}]
-    (testing "is it valid json?"
+    (testing "is the output valid json?"
       (is (valid-json?
             (sut/apply-jsonify? true clojure-map))))
-    (testing "is it valid edn?"
+    (testing "is the output valid edn?"
       (is (valid-edn?
-            (sut/apply-jsonify? false clojure-map))))
-    ))
+            (sut/apply-jsonify? false clojure-map))))))
 
 ;; TODO: Add test for the CLI.

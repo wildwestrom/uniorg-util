@@ -1,4 +1,7 @@
-{:deps {:aliases [:dev]}
+{:source-paths ["src" "test"]
+ :dependencies [[cljs-node-io/cljs-node-io     "1.1.2"]
+                [org.clojure/tools.cli         "1.0.206"]
+                [refactor-nrepl/refactor-nrepl "2.5.1"]]
 
  :nrepl
  {:port  3333
@@ -6,11 +9,10 @@
 
  :builds
  {:script {:target     :node-script
-           :output-to  "main.js"
-           ;; :entries    [uniorg-util]
+           :output-to  "out/main.js"
            :exports-fn uniorg-util.core/create-files
            :main       uniorg-util.core/main}
   :test   {:target    :node-test
-           :output-to "node-tests.js"
+           :output-to "out/node-tests.js"
            :ns-regexp "-test$"
            :autorun   true}}}

@@ -4,7 +4,6 @@
             ["uniorg-parse" :as uniorg]
             ["uniorg-rehype" :as rehype]
             ["uniorg-extract-keywords" :refer (extractKeywords)]
-            [clojure.string :as string]
             [cljs-node-io.core :as io :refer [slurp spit]]
             [cljs-node-io.fs :as fs]
             [uniorg-util.helpers :as h]))
@@ -76,32 +75,36 @@
           (apply-jsonify? json? file))))
 
 (defn gen-list-of-posts
-  [out-path files extension json?]
-  (spit (str out-path "/_ALL_POSTS" extension)
+  [out-path files extension json? out-filename]
+  (spit (str out-path "/" out-filename extension)
         (apply-jsonify?
           json?
           (for [file files]
             (str (gen-file-title file) extension)))))
 
-(defn create-files [in-path out-path json?]
-  (create-out-dir out-path)
-  (let [input     (h/filter-ext (h/files-in-dir in-path) ".org")
-        files     (map #(assoc (blog-post %) :meta
-                               (conj (:meta (blog-post %))
-                                     {:original-filename (h/remove-extension %)})) input)
-        ;;TODO Clean up `files`
-        extension (if json? ".json" ".edn")]
-    (dorun
-      (gen-all-posts out-path files extension json?)
-      (gen-list-of-posts out-path files extension json?))))
+(defn create-files
+  ([in-path out-path json?]
+   (create-files in-path out-path json? nil))
+  ([in-path out-path json? manifest]
+   (create-out-dir out-path)
+   (let [input     (h/filter-ext (h/files-in-dir in-path) ".org")
+         files     (map #(assoc (blog-post %) :meta
+                                (conj (:meta (blog-post %))
+                                      {:original-filename (h/remove-extension (fs/basename %))})) input)
+         ;;TODO Clean up `files`
+         extension (if json? ".json" ".edn")]
+     (dorun
+       (gen-all-posts out-path files extension json?)
+       (when manifest
+         (gen-list-of-posts out-path files extension json? manifest))))))
 
 (defn ^:export main "
   Set `json?` to `false` for edn output.
   Both `in-path` and `out-path` take strings
   without trailing slashes as file paths."
   ([in-path out-path]
-   (create-files in-path out-path true))
+   (main in-path out-path true))
   ([in-path out-path json?]
-   (if json?
-     (create-files in-path out-path true)
-     (create-files in-path out-path false))))
+   (create-files in-path out-path json? "_ALL_FILES"))
+  ([in-path out-path json? manifest]
+   (create-files in-path out-path json? manifest)))

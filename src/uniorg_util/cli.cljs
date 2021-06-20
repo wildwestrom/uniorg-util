@@ -5,11 +5,16 @@
    [uniorg-util.core :as core]))
 
 (def ^:private cli-options
-  [["-o" "--output" "Directory to output to"
+  [["-i" "--input" "Directory to read from"
+    :default "."]
+   ["-o" "--output" "Directory to output to"
     :default "."]
    ["-e" "--edn" "Output files as edn instead of json"
     :default false
-    :update-fn true]
+    :flag true]
+   ["-m " "--generate-manifest" "Create a list of all-files processed."
+    :default nil
+    :parse-opts ""]
    ["-h" "--help"]])
 
 (defn- usage [options-summary]
@@ -38,14 +43,13 @@
   (println msg)
   (.exit js/process status))
 
-;; TODO: Finish CLI
 ;; (defn ^:export main
 ;;   []
 ;;   ())
 
 (comment
-  ("uniorg-util -e")
-  (create-files "." "." )
+  ["uniorg-util" "should output to json"]
+  (core/create-files "." "." )
 
 
   )
