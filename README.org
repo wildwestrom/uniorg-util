@@ -22,6 +22,52 @@ It relies heavily on [[https://github.com/rasendubi][rasendubi]]'s very accurate
      -h, --help
    #+end_verbatim
 
+** Example:
+
+*** Input:
+
+   #+begin_src org
+#+title: Here's a title
+#+subtitle: And more headers
+#+date: 2021-04-15
+#+tags: it also has an id
+#+author: Christian Westrom
+#+id: test-1
+
+* Here's some stuff
+  :PROPERTIES:
+  :id: Here's a drawer of stuff
+  :END:
+  * Here's more stuff
+
+** DONE Make example
+   CLOSED: [2021-06-20 Sun 23:10]
+   #+end_src
+
+*** Output
+
+    #+begin_src edn
+ {:content
+  "<h1>Here's some stuff</h1>
+ <ul>
+     <li>
+         <p>Here's more stuff\n</p>
+     </li>
+ </ul>
+ <h2>
+     <span class=\"todo-keyword DONE\">DONE</span>
+     Make example
+ </h2>",
+  :meta {:title             "Here's a title",
+         :subtitle          "And more headers",
+         :date              "2021-04-15",
+         :tags              "it also has an id",
+         :author            "Christian Westrom",
+         :id                "test-1",
+         :original-filename "100-test"}}
+    #+end_src
+
+
 ** TODO Features and Bugfixes:
 *** TODO Figure out CI/CD.
     This project should test before committing or accepting pull requests.\\

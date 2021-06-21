@@ -1,10 +1,15 @@
-#+title: Everything ok here
-#+subtitle: stuff test
+#+title: Here's a title
+#+subtitle: And more headers
 #+date: 2021-04-15
-#+tags: test
+#+tags: it also has an id
 #+author: Christian Westrom
 #+id: test-1
 
 * Here's some stuff
+  :PROPERTIES:
+  :id: Here's a drawer of stuff
+  :END:
   * Here's more stuff
-  - more stuff
+
+** DONE Make example
+   CLOSED: [2021-06-20 Sun 23:10]
