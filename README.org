@@ -7,20 +7,20 @@ It relies heavily on [[https://github.com/rasendubi][rasendubi]]'s very accurate
 
 ** Usage:
    Outputs json by default.
-   #+begin_example shell
+   #+begin_src shell
    node main.js [OPTIONS]
-   #+end_example
+   #+end_src
 
    By default it will process everything in the current directory.
 
    Options:
-   #+begin_verbatim
+   #+begin_example
      -i, --input [DIR]      .      Directory to read from
      -o, --output [DIR]     .      Directory to output to
      -e, --edn                     Output files as edn instead of json
      -m, --manifest [NAME]  false  Create a list of all-files processed.
      -h, --help
-   #+end_verbatim
+   #+end_example
 
 ** Example:
 
@@ -46,6 +46,8 @@ It relies heavily on [[https://github.com/rasendubi][rasendubi]]'s very accurate
 
 *** Output
 
+    Note: Formatted nicely just for show.\\
+    Outputs as one line.
     #+begin_src edn
  {:content
   "<h1>Here's some stuff</h1>
@@ -68,16 +70,35 @@ It relies heavily on [[https://github.com/rasendubi][rasendubi]]'s very accurate
     #+end_src
 
 
-** TODO In Progress:
-- [ ] TODO: Figure out CI/CD.
+** TODO In Progress [20%]
+- [ ] TODO Figure out CI/CD.
     This project should test before committing or accepting pull requests.\\
     This project should also build, test, and deploy to npm on commit.
-- [ ] TODO: Prevent filename collision.
+- [ ] TODO Prevent filename collision.
     If the filename is going to be the same, do something to prevent collision.
-- [X] DONE: Make into a polished command line tool.
+- [X] DONE Make into a polished command line tool.
     CLOSED: [2021-06-20 Sun 22:49]
-- [ ] TODO: Publish on NPM,
+- [ ] TODO Create realease on Github.
+- [ ] TODO Publish on NPM,
     I'd like to just do ~npm install uniorg-util~ and ~uniorg-util -i [in-dir] -o [out-dir]~.
+
+** Development:
+
+   Install dependencies:
+   #+begin_src shell
+   yarn install
+   #+end_src
+
+   Build the script:
+   #+begin_src shell
+   yarn build
+   #+end_src
+
+   Run tests:
+   #+begin_src shell
+   yarn test
+   #+end_src
+
 
 * License
   This program converts your org-mode files into html + metadata.\\
