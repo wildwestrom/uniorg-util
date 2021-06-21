@@ -6,8 +6,6 @@
 .nrepl-port
 
 /node_modules/
-package-lock.json
-yarn.lock
 
 json-data/
 edn-data/
