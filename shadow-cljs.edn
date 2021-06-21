@@ -11,7 +11,7 @@
  {:script {:target     :node-script
            :output-to  "out/main.js"
            :exports-fn uniorg-util.core/create-files
-           :main       uniorg-util.core/main}
+           :main       uniorg-util.core/-main}
   :test   {:target    :node-test
            :output-to "out/node-tests.js"
            :ns-regexp "-test$"

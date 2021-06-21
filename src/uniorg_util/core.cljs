@@ -101,4 +101,4 @@
   (let [{:keys [options exit-message ok?]} (cli/validate-args args)]
     (if exit-message
       (cli/exit (if ok? 0 1) exit-message)
-      (create-files (:input options) (:output options) (:edn options) (:manifest options)))))
+      (create-files (:input options) (:output options) (not (:edn options)) (:manifest options)))))

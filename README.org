@@ -6,29 +6,32 @@ Outputs to both json and edn formats.
 It relies heavily on [[https://github.com/rasendubi][rasendubi]]'s very accurate org-mode parser, *[[https://github.com/rasendubi/uniorg][uniorg]]*.\\
 
 ** Usage:
-   To run, paste into the command line.\\
    Outputs json by default.
-   #+begin_src shell
-     node main.js [IN-DIR] [OUT-DIR]
-   #+end_src
+   #+begin_example shell
+   node main.js [OPTIONS]
+   #+end_example
 
-   Add ~false~ to output files as edn.
-   #+begin_src shell
-     node main.js [IN-DIR] [OUT-DIR] false
-   #+end_src
+   By default it will process everything in the current directory.
 
-** TODO Known issues:
-*** TODO If an org-document has the same fields or filenames, it creates a single file.
-    Not sure what other undefined behavior it has.
+   Options:
+   #+begin_verbatim
+     -i, --input [DIR]      .      Directory to read from
+     -o, --output [DIR]     .      Directory to output to
+     -e, --edn                     Output files as edn instead of json
+     -m, --manifest [NAME]  false  Create a list of all-files processed.
+     -h, --help
+   #+end_verbatim
 
-** TODO Features to be implemented:
+** TODO Features and Bugfixes:
 *** TODO Figure out CI/CD.
     This project should test before committing or accepting pull requests.\\
     This project should also build, test, and deploy to npm on commit.
-*** TODO Make into a polished command line tool.
-    Currently just an API accessible via CLI.
+*** TODO Prevent filename collison.
+    If the filename is going to be the same, do something to prevent collision.
+*** DONE Make into a polished command line tool.
+    CLOSED: [2021-06-20 Sun 22:49]
 *** TODO Publish on NPM,
-    I'd like to just do ~npm install uniorg-util~ and ~uniorg-util [in-dir] [out-dir]~.
+    I'd like to just do ~npm install uniorg-util~ and ~uniorg-util -i [in-dir] -o [out-dir]~.
 
 * License
   This program converts your org-mode files into html + metadata.\\
