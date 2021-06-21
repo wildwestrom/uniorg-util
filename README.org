@@ -71,16 +71,17 @@ It relies heavily on [[https://github.com/rasendubi][rasendubi]]'s very accurate
 
 
 ** DOING In Progress [40%]
-- [ ] TODO Figure out CI/CD.
+- [ ] TODO Figure out CI/CD.\\
   This project should test before committing or accepting pull requests.\\
   This project should also build, test, and deploy to npm on commit.
-- [X] TODO Prevent filename collision.
+- [X] TODO Prevent filename collision.\\
   Now all it does is use the input filename. Same directory filename collisions on the OS level are not possible (at least I don't think they are).
-- [X] DONE Make into a polished command line tool.
+- [X] DONE Make into a polished command line tool.\\
     CLOSED: [2021-06-20 Sun 22:49]
 - [ ] TODO Create realease on Github.
-- [ ] TODO Publish on NPM,
+- [ ] TODO Publish on NPM.\\
   I'd like to just do ~npm install uniorg-util~ and ~uniorg-util -i [in-dir] -o [out-dir]~.
+
 
 ** Development:
 
