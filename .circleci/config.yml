@@ -1,0 +1,57 @@
+# Clojure CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-clojure/ for more details
+#
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      # specify the version you desire here
+      - image: circleci/clojure:tools-deps-node
+
+      # Specify service dependencies here if necessary
+      # CircleCI maintains a library of pre-built images
+      # documented at https://circleci.com/docs/2.0/circleci-images/
+      # - image: circleci/postgres:9.4
+
+    working_directory: ~/repo
+
+    environment:
+      # Customize the JVM maximum heap limit
+      JVM_OPTS: -Xmx3200m
+
+    steps:
+      - checkout
+      # Download and cache dependencies
+      - restore_cache:
+          name: Restore node and Clojure dependency cache
+          keys:
+            - 'clj-node-{{ checksum "shadow-cljs.edn" }}-{{ checksum "yarn.lock" }}'
+            # fallback to using the latest cache if no exact match is found
+            - 'clj-node'
+      - run:
+          name: Install node dependencies
+          command: yarn install
+      - run:
+          name: Run tests
+          command: yarn test
+      - run:
+          name: Build project
+          command: yarn build
+      - persist_to_workspace:
+          root: ~/
+          paths:
+              - repo/public
+      - save_cache:
+          name: Save dependency cache
+          paths:
+            - ~/.m2
+            - ~/.cache/yarn
+            - ~/repo/node_modules
+          key: 'clj-node-{{ checksum "shadow-cljs.edn" }}-{{ checksum "package.json" }}'
+
+workflows:
+  build:
+    jobs:
+      - build
