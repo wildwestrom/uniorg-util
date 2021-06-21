@@ -16,33 +16,6 @@
 (deftest remove-extension
   (is (= (h/remove-extension "~/.config/README.org") "README")))
 
-
-(defn file-ext-test
-  [json? test-type ext]
-  (sut/create-files test-in-dir test-out-dir json? false)
-  (let [dirs      (h/files-in-dir test-out-dir)
-        is-or-not (condp = test-type
-                    '=    "is"
-                    'not= "is not")]
-    (testing (str "when `json?` " is-or-not " `" json? "`, output to `" ext "`.")
-      (is (test-type (h/filter-ext dirs ext)
-                     dirs))))
-  (cleanup test-out-dir))
-
-(deftest file-extensions
-  (file-ext-test true  '=    ".json")
-  (file-ext-test false '=    ".edn")
-  (file-ext-test true  'not= ".edn")
-  (file-ext-test false 'not= ".json"))
-
-(deftest all-posts-generated
-  (testing "Each input file corresponds to an output file when generating the posts."
-    (do
-      (sut/create-files test-in-dir test-out-dir true nil)
-      (is (= (count (h/files-in-dir test-in-dir))
-             (count (h/files-in-dir test-out-dir))))
-      (cleanup test-out-dir))))
-
 (defn valid-json?
   [str]
   (try
@@ -59,12 +32,39 @@
 
 (deftest jsonify-creates-valid-json
   (let [clojure-map {:keyword :kw
-                     :list    '("here" "is" "some")
-                     :vec     [1 2 3 4 "fuckerfuck"]
-                     :regex   #"assbags"}]
+                     :list    '("here" "is" "stuff")
+                     :vec     [1 2 3 4 "string"]
+                     :regex   #"this is a regex"
+                     :char    \c}]
     (testing "is the output valid json?"
       (is (valid-json?
             (sut/apply-jsonify? true clojure-map))))
     (testing "is the output valid edn?"
       (is (valid-edn?
             (sut/apply-jsonify? false clojure-map))))))
+
+(defn file-ext-test
+  [edn? test-type ext]
+  (sut/-main "-i" test-in-dir "-o" test-out-dir edn?)
+  (let [dirs      (h/files-in-dir test-out-dir)
+        is-or-not (condp = test-type
+                    '=    "is"
+                    'not= "is not")]
+    (testing (str "when \"-e\" " is-or-not "used, output to `" ext "`.")
+      (is (test-type (h/filter-ext dirs ext)
+                     dirs))))
+  (cleanup test-out-dir))
+
+(deftest file-extensions
+  (file-ext-test nil '=    ".json")
+  (file-ext-test "-e"'=    ".edn")
+  (file-ext-test nil 'not= ".edn")
+  (file-ext-test "-e"'not= ".json"))
+
+(deftest all-posts-generated
+  (testing "Each input file corresponds to an output file when generating the posts."
+    (do
+      (sut/-main "-i" test-in-dir "-o" test-out-dir)
+      (is (= (count (h/files-in-dir test-in-dir))
+             (count (h/files-in-dir test-out-dir))))
+      (cleanup test-out-dir))))

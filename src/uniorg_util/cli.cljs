@@ -2,18 +2,20 @@
   (:require
    [clojure.tools.cli :refer [parse-opts]]
    [clojure.string :as string]
-   [uniorg-util.core :as core]))
+   [cljs-node-io.fs :as fs]))
 
 (def ^:private cli-options
-  [["-i" "--input" "Directory to read from"
-    :default "."]
-   ["-o" "--output" "Directory to output to"
+  [["-i" "--input [DIR]" "Directory to read from"
+    :default "."
+    :validate [#(fs/dir? %) "Not a directory"]
+    :post-validation true
+    ]
+   ["-o" "--output [DIR]" "Directory to output to"
     :default "."]
    ["-e" "--edn" "Output files as edn instead of json"
     :default false]
-   ["-m" "--manifest" "Create a list of all-files processed."
-    :default false
-    :parse-fn str]
+   ["-m" "--manifest [NAME]" "Create a list of all-files processed."
+    :default false]
    ["-h" "--help"]])
 
 (defn- usage [options-summary]
@@ -31,22 +33,14 @@
   (str "The following errors occurred while parsing your command:\n\n"
        (string/join \newline errors)))
 
-(defn- validate-args [args]
+(defn validate-args [args]
   (let [{:keys [options errors summary]} (parse-opts args cli-options)]
     (cond
       (:help options) {:exit-message (usage summary) :ok? true}
       errors          {:exit-message (error-msg errors)}
+      options         {:options options}
       :else           {:exit-message (usage summary)})))
 
-(defn- exit [status msg]
+(defn exit [status msg]
   (println msg)
   (.exit js/process status))
-
-;; (defn -main [& args]
-;;   (let [{:keys [action options exit-message ok?]} (validate-args args)]
-;;     (if exit-message
-;;       (exit (if ok? 0 1) exit-message)
-;;       (case action
-;;         "start"  (println action)
-;;         "stop"   (println action)
-;;         "status" (println action)))))

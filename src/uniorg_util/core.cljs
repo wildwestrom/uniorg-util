@@ -6,7 +6,9 @@
             ["uniorg-extract-keywords" :refer (extractKeywords)]
             [cljs-node-io.core :as io :refer [slurp spit]]
             [cljs-node-io.fs :as fs]
-            [uniorg-util.helpers :as h]))
+            [uniorg-util.helpers :as h]
+            [uniorg-util.cli :as cli]
+            ))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; The actual program.
@@ -83,17 +85,20 @@
             (str (gen-file-title file) extension)))))
 
 (defn create-files
-  ([in-path out-path json?]
-   (create-files in-path out-path json? nil))
   ([in-path out-path json? manifest]
    (create-out-dir out-path)
    (let [input     (h/filter-ext (h/files-in-dir in-path) ".org")
          files     (map #(assoc (blog-post %) :meta
                                 (conj (:meta (blog-post %))
                                       {:original-filename (h/remove-extension (fs/basename %))})) input)
-         ;;TODO Clean up `files`
          extension (if json? ".json" ".edn")]
      (dorun
        (gen-all-posts out-path files extension json?)
        (when manifest
          (gen-list-of-posts out-path files extension json? manifest))))))
+
+(defn -main [& args]
+  (let [{:keys [options exit-message ok?]} (cli/validate-args args)]
+    (if exit-message
+      (cli/exit (if ok? 0 1) exit-message)
+      (create-files (:input options) (:output options) (:edn options) (:manifest options)))))

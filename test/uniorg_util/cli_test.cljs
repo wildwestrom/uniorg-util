@@ -1,35 +1,52 @@
 (ns uniorg-util.cli-test
   (:require
    [clojure.tools.cli :refer [parse-opts]]
+   [cljs-node-io.fs :as fs]
    [uniorg-util.cli :as sut]
    [cljs.test :refer-macros [deftest testing is]]))
 
-(defn parsed-opts
-  [& args]
-  (parse-opts args sut/cli-options))
+(defn options-test
+  [& opts]
+  (:options (parse-opts opts sut/cli-options)))
 
-(defn opts-map [args]
-  (:options (parsed-opts args)))
+(defn errors-test
+  [& opts]
+  (:errors (parse-opts opts sut/cli-options)))
 
 (deftest edn
-  (let [test-edn #(:edn (opts-map %))]
-    (testing "Testing to see if EDN flag parses properly"
-      (is (true?  (test-edn "-e")))
-      (is (true?  (test-edn "-em")))
-      (is (true?  (test-edn "-e -m")))
-      (is (true?  (test-edn "--edn -m")))
-      (is (true?  (test-edn "--edn --manifest filename")))
-      (is (false? (test-edn "-m filename"))))))
+  (testing "EDN flag parses properly"
+    (is (true?  (:edn (options-test "-e"))))
+    (is (true?  (:edn (options-test "--edn"))))
+    (is (true?  (:edn (options-test "-em"))))
+    (is (true?  (:edn (options-test "-e" "-m"))))
+    (is (true?  (:edn (options-test "--edn" "-m"))))
+    (is (true?  (:edn (options-test "--edn" "--manifest" "filename"))))
+    (is (false? (:edn (options-test "-m" "filename"))))))
 
 (deftest manifest
-  (let [test-manifest #(:manifest (opts-map %))]
-    (testing "Testing to make sure the manifest flag works correctly"
-      (is (false? (test-manifest "-e")))
-      (is (true?  (test-manifest "-m")))
-      (is (false? (test-manifest "--edn")))
-      (is (true?  (test-manifest "--manifest")))
-      (is (true?  (test-manifest "--manifest filename")))
-      (is (true?  (test-manifest "--edn --manifest filename")))
-      )))
+  (testing "Manifest flag works correctly"
+    (is (not (nil?    (errors-test "-m"))))
+    (is (not (nil?    (errors-test "--manifest"))))
+    (is (= "filename" (:manifest (options-test "-m" "filename"))))
+    (is (= "filename" (:manifest (options-test "--manifest" "filename"))))
+    (is (= "filename" (:manifest (options-test "--edn" "--manifest" "filename"))))))
 
-;; TODO: Complete tests for the CLI.
+(deftest input-output
+  (testing "Make sure input/output works\n"
+    (testing "Give errors on invalid input dir:"
+      (is (not (nil? (errors-test "-i" "directory"))))
+      (is (not (nil? (errors-test "--input" "directory")))))
+    (testing "Return path on correct input dir:"
+      (is (= "."          (:input  (options-test nil))))
+      (is (= "test-posts" (:input  (options-test "-i" "test-posts"))))
+      (is (= "test-posts" (:input  (options-test "--input" "test-posts")))))
+    (testing "Output:"
+      (is (= "."         (:output (options-test nil))))
+      (is (= "directory" (:output (options-test "-o" "directory"))))
+      (is (= "directory" (:output (options-test "--output" "directory")))))))
+
+(deftest help-menu
+  (testing "Parse help"
+    (is (true? (:help (options-test "-h"))))
+    (is (true? (:help (options-test "--help"))))
+    (is (true? (:help (options-test "--edn" "-h"))))))
