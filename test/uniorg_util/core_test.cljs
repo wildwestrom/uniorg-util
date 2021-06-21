@@ -13,6 +13,9 @@
   (when (fs/dir? path)
     (fs/rm-r path)))
 
+;; Pre-clean before starting tests, just in case.
+(cleanup test-out-dir)
+
 (deftest remove-extension
   (is (= (h/remove-extension "~/.config/README.org") "README")))
 

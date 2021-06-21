@@ -3,7 +3,7 @@
 This program converts your org-mode files into html + metadata.\\
 Outputs to both json and edn formats.
 
-It relies heavily on [[https://github.com/rasendubi][rasendubi]]'s very accurate org-mode parser, *[[https://github.com/rasendubi/uniorg][uniorg]]*.\\
+It relies heavily on [[https://github.com/rasendubi][rasendubi]]'s very accurate org-mode parser, *[[https://github.com/rasendubi/uniorg][uniorg]]*.
 
 ** Usage:
    Outputs json by default.
@@ -70,17 +70,17 @@ It relies heavily on [[https://github.com/rasendubi][rasendubi]]'s very accurate
     #+end_src
 
 
-** TODO In Progress [20%]
+** DOING In Progress [40%]
 - [ ] TODO Figure out CI/CD.
-    This project should test before committing or accepting pull requests.\\
-    This project should also build, test, and deploy to npm on commit.
-- [ ] TODO Prevent filename collision.
-    If the filename is going to be the same, do something to prevent collision.
+  This project should test before committing or accepting pull requests.\\
+  This project should also build, test, and deploy to npm on commit.
+- [X] TODO Prevent filename collision.
+  Now all it does is use the input filename. Same directory filename collisions on the OS level are not possible (at least I don't think they are).
 - [X] DONE Make into a polished command line tool.
     CLOSED: [2021-06-20 Sun 22:49]
 - [ ] TODO Create realease on Github.
 - [ ] TODO Publish on NPM,
-    I'd like to just do ~npm install uniorg-util~ and ~uniorg-util -i [in-dir] -o [out-dir]~.
+  I'd like to just do ~npm install uniorg-util~ and ~uniorg-util -i [in-dir] -o [out-dir]~.
 
 ** Development:
 

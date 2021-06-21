@@ -6,12 +6,18 @@
 ;; Helper functions.
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;; (defn files-in-dir
+;;   "Like `file-seq` but not recursive.
+;;   Returns strings."
+;;   [path]
+;;   (let [p (fs/realpath path)]
+;;     (map #(str p "/" %) (fs/readdir p))))
+
 (defn files-in-dir
   "Like `file-seq` but not recursive.
   Returns strings."
   [path]
-  (let [p (fs/realpath path)]
-    (map #(str p "/" %) (fs/readdir p))))
+  (map #(str path "/" %) (fs/readdir path)))
 
 
 (defn filter-ext

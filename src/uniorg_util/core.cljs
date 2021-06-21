@@ -7,12 +7,7 @@
             [cljs-node-io.core :as io :refer [slurp spit]]
             [cljs-node-io.fs :as fs]
             [uniorg-util.helpers :as h]
-            [uniorg-util.cli :as cli]
-            ))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; The actual program.
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+            [uniorg-util.cli :as cli]))
 
 (def ^:private processor
   (->
@@ -49,15 +44,13 @@
   [file]
   (post-map (slurp file)))
 
-(defn- gen-file-title [file]
-  (let [get-from-meta (fn [file key]
-                        (-> file :meta key))]
-    (first
-      (filter #(->> % nil? not)
-              (list
-                (get-from-meta file :id)
-                (get-from-meta file :title)
-                (get-from-meta file :original-filename))))))
+(defn get-from-meta
+  [file key]
+  (-> file :meta key))
+
+(defn- gen-file-title
+  [file]
+  (get-from-meta file :filename))
 
 (defn jsonify [file]
   (-> file
@@ -84,13 +77,19 @@
           (for [file files]
             (str (gen-file-title file) extension)))))
 
+(defn add-filename-to-metadata
+  [filepath]
+  (map #(assoc (blog-post %) :meta
+               (conj (:meta (blog-post %))
+                     {:filename (h/remove-extension
+                                  (fs/basename %))}))
+       filepath))
+
 (defn create-files
   ([in-path out-path json? manifest]
    (create-out-dir out-path)
    (let [input     (h/filter-ext (h/files-in-dir in-path) ".org")
-         files     (map #(assoc (blog-post %) :meta
-                                (conj (:meta (blog-post %))
-                                      {:original-filename (h/remove-extension (fs/basename %))})) input)
+         files     (add-filename-to-metadata input)
          extension (if json? ".json" ".edn")]
      (dorun
        (gen-all-posts out-path files extension json?)
@@ -101,4 +100,8 @@
   (let [{:keys [options exit-message ok?]} (cli/validate-args args)]
     (if exit-message
       (cli/exit (if ok? 0 1) exit-message)
-      (create-files (:input options) (:output options) (not (:edn options)) (:manifest options)))))
+      (create-files
+        (:input options)
+        (:output options)
+        (not (:edn options))
+        (:manifest options)))))
