@@ -68,15 +68,15 @@ It relies heavily on [[https://github.com/rasendubi][rasendubi]]'s very accurate
     #+end_src
 
 
-** TODO Features and Bugfixes:
-*** TODO Figure out CI/CD.
+** TODO In Progress:
+- [ ] TODO: Figure out CI/CD.
     This project should test before committing or accepting pull requests.\\
     This project should also build, test, and deploy to npm on commit.
-*** TODO Prevent filename collison.
+- [ ] TODO: Prevent filename collision.
     If the filename is going to be the same, do something to prevent collision.
-*** DONE Make into a polished command line tool.
+- [X] DONE: Make into a polished command line tool.
     CLOSED: [2021-06-20 Sun 22:49]
-*** TODO Publish on NPM,
+- [ ] TODO: Publish on NPM,
     I'd like to just do ~npm install uniorg-util~ and ~uniorg-util -i [in-dir] -o [out-dir]~.
 
 * License
