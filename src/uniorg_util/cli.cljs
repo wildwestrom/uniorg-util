@@ -14,16 +14,16 @@
     :default "."]
    ["-e" "--edn" "Output files as EDN instead of JSON"
     :default false]
-   ["-m" "--manifest [NAME]" "Create a list of all-files processed."
+   ["-m" "--manifest [NAME]" "Create a list of all-files processed"
     :default false]
    ["-h" "--help"]])
 
 (defn- usage [options-summary]
-  (->> ["This is a tool designed to make it easy to turn Org Mode documents into HTML and metadata."
+  (->> ["Easily convert your Org Mode documents into HTML and metadata."
         ""
         "Usage: uniorg-util [OPTIONS] [FILES...]"
         ""
-        "By default it will process everything in the current directory."
+        "By default it will process everything in the current working directory."
         ""
         "Options:"
         options-summary]

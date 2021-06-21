@@ -1,12 +1,12 @@
 * Uniorg Utility
 
-This program converts your org-mode files into html + metadata.\\
-Outputs to both json and edn formats.
+This program converts your Org Mode documents into HTML + metadata.\\
+Outputs to both JSON and EDN formats.
 
-It relies heavily on [[https://github.com/rasendubi][rasendubi]]'s very accurate org-mode parser, *[[https://github.com/rasendubi/uniorg][uniorg]]*.
+It relies heavily on [[https://github.com/rasendubi][rasendubi]]'s very accurate Org Mode parser, *[[https://github.com/rasendubi/uniorg][uniorg]]*.
 
 ** Usage:
-   Outputs json by default.
+   Outputs JSON by default.
    #+begin_src shell
    node main.js [OPTIONS]
    #+end_src
@@ -17,8 +17,8 @@ It relies heavily on [[https://github.com/rasendubi][rasendubi]]'s very accurate
    #+begin_example
      -i, --input [DIR]      .      Directory to read from
      -o, --output [DIR]     .      Directory to output to
-     -e, --edn                     Output files as edn instead of json
-     -m, --manifest [NAME]  false  Create a list of all-files processed.
+     -e, --edn                     Output files as EDN instead of JSON
+     -m, --manifest [NAME]  false  Create a list of all-files processed
      -h, --help
    #+end_example
 
@@ -101,7 +101,7 @@ It relies heavily on [[https://github.com/rasendubi][rasendubi]]'s very accurate
 
 
 * License
-  This program converts your org-mode files into html + metadata.\\
+  This program converts your Org Mode documents into HTML + metadata.\\
   Copyright © 2021 Christian Westrom
 
   This program is free software: you can redistribute it and/or modify it
