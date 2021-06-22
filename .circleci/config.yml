@@ -10,11 +10,6 @@ jobs:
       # specify the version you desire here
       - image: circleci/clojure:tools-deps-node
 
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # - image: circleci/postgres:9.4
-
     working_directory: ~/repo
 
     environment:
@@ -39,17 +34,17 @@ jobs:
       - run:
           name: Build project
           command: yarn build
-      - persist_to_workspace:
-          root: ~/
-          paths:
-              - repo/public
+
       - save_cache:
           name: Save dependency cache
           paths:
             - ~/.m2
             - ~/.cache/yarn
             - ~/repo/node_modules
-          key: 'clj-node-{{ checksum "shadow-cljs.edn" }}-{{ checksum "package.json" }}'
+          key: 'clj-node-{{ checksum "shadow-cljs.edn" }}-{{ checksum "yarn.lock" }}'
+
+      - store_artifacts:
+          path: ~/repo/out
 
 workflows:
   build:
