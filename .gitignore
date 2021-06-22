@@ -2,6 +2,7 @@
 /.shadow-cljs/
 /.calva/
 /.lsp/
+/.log/
 .dir-locals.el
 .nrepl-port
 
