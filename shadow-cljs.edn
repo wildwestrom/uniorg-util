@@ -16,8 +16,4 @@
            :output-to "out/node-tests.js"
            :ns-regexp "-test$"
            :autorun   true}
-  :ci     {:target    :karma
-           :output-to "out/ci.js"
-           :ns-regexp "-test$"
-           :autorun   true}
   }}
