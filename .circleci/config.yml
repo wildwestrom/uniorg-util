@@ -7,13 +7,11 @@ version: 2.1
 jobs:
   build:
     docker:
-      # specify the version you desire here
       - image: circleci/clojure:tools-deps-node
 
     working_directory: ~/repo
 
     environment:
-      # Customize the JVM maximum heap limit
       JVM_OPTS: -Xmx3200m
 
     steps:
@@ -53,6 +51,13 @@ jobs:
       - store_artifacts:
           path: ~/repo/out/main.js
   test:
+    docker:
+      - image: circleci/clojure:tools-deps-node
+
+    working_directory: ~/repo
+
+    environment:
+      JVM_OPTS: -Xmx3200m
     steps:
       - checkout
       - restore_cache:
@@ -98,7 +103,7 @@ workflows:
           requires:
             - test
             - build
-      - publish-to-npm:
-          requires:
-            - test
-            - build
+      # - publish-to-npm:
+      #     requires:
+      #       - test
+      #       - build
