@@ -53,6 +53,7 @@ jobs:
       - store_artifacts:
           path: ~/repo/out/main.js
   test:
+    steps:
       - checkout
       - restore_cache:
           name: Restore cljs dependency cache
@@ -97,6 +98,7 @@ workflows:
           requires:
             - test
             - build
-      # - publish-to-npm:
-      #     requires:
-      #       - test
+      - publish-to-npm:
+          requires:
+            - test
+            - build
