@@ -20,12 +20,14 @@ jobs:
       - checkout
       # Download and cache dependencies
       - restore_cache:
-          name: Restore node and Clojure dependency cache
+          name: Restore cljs dependency cache
           keys:
             - 'cljs-{{ checksum "shadow-cljs.edn" }}'
-            - 'node-{{ checksum "yarn.lock" }}'
-            # fallback to using the latest cache if no exact match is found
             - 'cljs'
+      - restore_cache:
+          name: Restore node dependency cache
+          keys:
+            - 'node-{{ checksum "yarn.lock" }}'
             - 'node'
 
       - run:
@@ -44,16 +46,14 @@ jobs:
           name: Save cljs dependency cache
           paths:
             - ~/.m2
-          key:
-            - 'cljs-{{ checksum "shadow-cljs.edn" }}'
+          key: 'cljs-{{ checksum "shadow-cljs.edn" }}'
 
       - save_cache:
           name: Save node dependency cache
           paths:
             - ~/.cache/yarn
             - ~/repo/node_modules
-          key:
-            - 'node-{{ checksum "yarn.lock" }}'
+          key: 'node-{{ checksum "yarn.lock" }}'
 
       - store_artifacts:
           path: ~/repo/out
