@@ -11,12 +11,12 @@ It relies heavily on [[https://github.com/rasendubi][rasendubi]]'s very accurate
    Install with npm.
    #+begin_src shell
    npm install uniorg-util
-   #+begin_src shell
+   #+end_src
 
    Or install with yarn.
    #+begin_src shell
    yarn add uniorg-util
-   #+begin_src shell
+   #+end_src
 
 ** Usage:
    Outputs JSON by default.
