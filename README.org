@@ -1,4 +1,5 @@
 * Uniorg Utility
+  [[https://img.shields.io/circleci/build/gh/wildwestrom/uniorg-util/main.svg]]
 
 This program converts your Org Mode documents into HTML + metadata.\\
 Outputs to both JSON and EDN formats.
