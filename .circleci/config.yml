@@ -18,7 +18,6 @@ jobs:
 
     steps:
       - checkout
-      # Download and cache dependencies
       - restore_cache:
           name: Restore cljs dependency cache
           keys:
@@ -33,10 +32,6 @@ jobs:
       - run:
           name: Install node dependencies
           command: yarn install
-
-      - run:
-          name: Run tests
-          command: yarn test
 
       - run:
           name: Build project
@@ -56,7 +51,30 @@ jobs:
           key: 'node-{{ checksum "yarn.lock" }}'
 
       - store_artifacts:
-          path: ~/repo/out
+          path: ~/repo/out/main.js
+  test:
+      - checkout
+      - restore_cache:
+          name: Restore cljs dependency cache
+          keys:
+            - 'cljs-{{ checksum "shadow-cljs.edn" }}'
+            - 'cljs'
+      - restore_cache:
+          name: Restore node dependency cache
+          keys:
+            - 'node-{{ checksum "yarn.lock" }}'
+            - 'node'
+
+      - run:
+          name: Install node dependencies
+          command: yarn install
+
+      - run:
+          name: Run tests
+          command: yarn test
+
+      - store_artifacts:
+          path: ~/repo/out/node-tests.js
 
   publish-github-release:
     docker:
@@ -74,4 +92,11 @@ workflows:
   build:
     jobs:
       - build
-      - publish-github-release
+      - test
+      - publish-github-release:
+          requires:
+            - test
+            - build
+      # - publish-to-npm:
+      #     requires:
+      #       - test
