@@ -13,6 +13,8 @@
            :exports-fn uniorg-util.core/create-files
            :main       uniorg-util.core/-main}
   :test   {:target    :node-test
+           :test-dir  "out/"
            :output-to "out/node-tests.js"
            :ns-regexp "-test$"
-           :autorun   true}}}
+           :autorun   true}
+  }}
