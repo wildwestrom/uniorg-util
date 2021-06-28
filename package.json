@@ -1,7 +1,7 @@
 {
     "license": "GPL-3.0-or-later",
-    "version": "0.1.0",
-    "main": "out/main.js",
+    "version": "0.1.2",
+    "bin": "out/main.js",
     "scripts": {
         "build": "shadow-cljs release script",
         "test": "shadow-cljs compile test --config-merge \"{:autorun false}\" && node out/node-tests.js",

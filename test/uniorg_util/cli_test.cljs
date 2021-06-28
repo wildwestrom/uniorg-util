@@ -3,7 +3,9 @@
    [clojure.tools.cli :refer [parse-opts]]
    [cljs-node-io.fs :as fs]
    [uniorg-util.cli :as sut]
-   [cljs.test :refer-macros [deftest testing is]]))
+   [uniorg-util.helpers :refer [version-string]]
+   [cljs.test :refer-macros [deftest testing is]]
+   [clojure.string :as string]))
 
 (defn options-test
   [& opts]
@@ -50,3 +52,12 @@
     (is (true? (:help (options-test "-h"))))
     (is (true? (:help (options-test "--help"))))
     (is (true? (:help (options-test "--edn" "-h"))))))
+
+(deftest version-info
+  (testing "Parse version"
+    (is (true? (:version (options-test "-V"))))
+    (is (true? (:version (options-test "--version"))))
+    (is (true? (:version (options-test "--edn" "-V"))))
+    (is (true? (:version (options-test "--help" "--version")))))
+  (testing "Version output"
+    (is (= version-string (:exit-message (sut/validate-args ["--version"]))))))
