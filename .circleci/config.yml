@@ -52,9 +52,9 @@ jobs:
           path: ~/repo/out/main.js
 
       - persist_to_workspace:
-          root: ~/repo
+          root: ~/
           paths:
-            - out/*
+            - repo/out
 
   test:
     docker:
@@ -91,9 +91,10 @@ jobs:
   publish-github-release:
     docker:
       - image: circleci/node:latest
+    working_directory: ~/
     steps:
       - attach_workspace:
-          at: /tmp/release
+          at: ~/repo/out
       - run:
           name: "Publish Release on GitHub"
           command: |
