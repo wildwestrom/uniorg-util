@@ -94,7 +94,7 @@ jobs:
     working_directory: ~/
     steps:
       - attach_workspace:
-          at: ~/repo/out
+          at: ~/
       - run:
           name: "Debug"
           command: |
