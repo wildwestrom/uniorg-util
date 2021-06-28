@@ -84,7 +84,7 @@ jobs:
 
   publish-github-release:
     docker:
-      - image: cibuilds/node:latest
+      - image: circleci/node:latest
     steps:
       - attach_workspace:
           at: ~/repo
