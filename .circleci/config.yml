@@ -96,8 +96,10 @@ jobs:
       - attach_workspace:
           at: ~/project/out
       - run:
+          name: debug
+          command: "ls -la"
+      - run:
           name: "Publish Release on GitHub"
-          command: ls -la
           command: |
             VERSION=$(node out/main.js --version)
             ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${VERSION} ./artifacts/
