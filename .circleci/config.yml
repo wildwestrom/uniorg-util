@@ -98,9 +98,9 @@ jobs:
       - run:
           name: "Publish Release on GitHub"
           command: |
-            cd repo/out
-            ls -la
-            VERSION=$(node main.js --version)
+            cd repo
+            yarn install
+            VERSION=$(node out/main.js --version)
             ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${VERSION} ./artifacts/
 
 workflows:
