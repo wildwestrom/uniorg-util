@@ -50,6 +50,12 @@ jobs:
 
       - store_artifacts:
           path: ~/repo/out/main.js
+
+      - persist_to_workspace:
+          root: ~/repo
+          paths:
+            - out/*
+
   test:
     docker:
       - image: circleci/clojure:tools-deps-node
@@ -87,11 +93,11 @@ jobs:
       - image: circleci/node:latest
     steps:
       - attach_workspace:
-          at: ~/repo
+          at: /tmp/release
       - run:
           name: "Publish Release on GitHub"
           command: |
-            VERSION=$(node out/main.js --version)
+            VERSION=$(node main.js --version)
             ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${VERSION} ./artifacts/
 
 workflows:
