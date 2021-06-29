@@ -1,0 +1,16 @@
+/.cpcache/
+/.shadow-cljs/
+/.calva/
+/.lsp/
+/.log/
+.dir-locals.el
+.nrepl-port
+
+/node_modules/
+
+json-data/
+edn-data/
+test-output/
+out/
+
+.DS_Store
