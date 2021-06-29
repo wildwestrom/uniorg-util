@@ -1,3 +1,4 @@
+/.circleci/
 /.cpcache/
 /.shadow-cljs/
 /.calva/
