@@ -3,7 +3,7 @@
    [clojure.tools.cli :refer [parse-opts]]
    [cljs-node-io.fs :as fs]
    [uniorg-util.cli :as sut]
-   [uniorg-util.helpers :refer [version-string]]
+   [uniorg-util.version :refer [version-string]]
    [cljs.test :refer-macros [deftest testing is]]
    [clojure.string :as string]))
 

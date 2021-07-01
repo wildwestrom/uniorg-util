@@ -2,7 +2,7 @@
   (:require
    [clojure.tools.cli :refer [parse-opts]]
    [clojure.string :as string]
-   [uniorg-util.helpers :refer [version-string]]
+   [uniorg-util.version :refer [version-string]]
    [cljs-node-io.fs :as fs]))
 
 (def ^:private cli-options
