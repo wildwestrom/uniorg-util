@@ -1,5 +1,6 @@
 (ns uniorg-util.helpers
   (:require [cljs-node-io.fs :as fs]
+            [cljs-node-io.core :as io]
             [clojure.string :as string]))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -22,4 +23,9 @@
   [file]
   (first (string/split (fs/basename file) #"\.")))
 
-(def version-string "0.1.2")
+(defn get-version
+  []
+  (:version (js->clj (.parse js/JSON (io/slurp "package.json")) :keywordize-keys true)))
+
+(def version-string
+  (get-version))
