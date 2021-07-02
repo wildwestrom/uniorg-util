@@ -92,7 +92,11 @@
          files     (add-filename-to-metadata input)
          extension (if json? ".json" ".edn")]
      (dorun
-       (gen-all-posts out-path files extension json?)
+       (do
+         (gen-all-posts out-path files extension json?)
+         (println (str "processed " (count files) " files:"))
+         (doseq [file input]
+           (println file)))
        (when manifest
          (gen-list-of-posts out-path files extension json? manifest))))))
 

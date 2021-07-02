@@ -11,6 +11,6 @@
 json-data/
 edn-data/
 test-output/
-out/
+dist/
 
 .DS_Store

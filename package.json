@@ -3,11 +3,15 @@
     "version": "0.1.6",
     "preferGlobal": true,
     "bin": {
-        "uniorg-util": "./out/main.js"
+        "uniorg-util": "./dist/main.js"
+    },
+    "np": {
+        "yarn": true,
+        "contents": "dist"
     },
     "scripts": {
         "build": "shadow-cljs release script",
-        "test": "shadow-cljs compile test --config-merge \"{:autorun false}\" && node out/node-tests.js",
+        "test": "shadow-cljs compile test --config-merge \"{:autorun false}\" && node dist/node-tests.js",
         "watch:test": "shadow-cljs watch test",
         "watch": "shadow-cljs watch script"
     },

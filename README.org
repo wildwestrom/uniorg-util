@@ -21,7 +21,11 @@ It relies heavily on [[https://github.com/rasendubi][rasendubi]]'s very accurate
 ** Usage:
    Outputs JSON by default.
    #+begin_src shell
-   uniorg-util [OPTIONS]
+   npm run uniorg-util [OPTIONS]
+   #+end_src
+
+   #+begin_src shell
+   yarn uniorg-util [OPTIONS]
    #+end_src
 
    By default it will process everything in the current directory.
@@ -34,6 +38,11 @@ It relies heavily on [[https://github.com/rasendubi][rasendubi]]'s very accurate
      -m, --manifest [NAME]  false  Create a list of all-files processed
      -h, --help
    #+end_example
+
+   If installed globally, just run:
+   #+begin_src shell
+   uniorg-util [OPTIONS]
+   #+end_src
 
 ** Example:
 
@@ -86,6 +95,8 @@ It relies heavily on [[https://github.com/rasendubi][rasendubi]]'s very accurate
 ** TODO:
 - [X] Figure out why I can't run the tool after installing.
 - [ ] Automate pushing releases.
+- [ ] Try adding a watch function.\\
+  A function updates the data by watching a directory.
 
 ** Development:
 

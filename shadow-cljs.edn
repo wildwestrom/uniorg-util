@@ -9,12 +9,12 @@
 
  :builds
  {:script {:target     :node-script
-           :output-to  "out/main.js"
+           :output-to  "dist/main.js"
            :exports-fn uniorg-util.core/create-files
            :main       uniorg-util.core/-main}
   :test   {:target    :node-test
-           :test-dir  "out/"
-           :output-to "out/node-tests.js"
+           :test-dir  "dist/"
+           :output-to "dist/node-tests.js"
            :ns-regexp "-test$"
            :autorun   true}
   }}

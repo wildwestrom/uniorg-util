@@ -23,9 +23,5 @@
   [file]
   (first (string/split (fs/basename file) #"\.")))
 
-(defn get-version
-  []
-  (:version (js->clj (.parse js/JSON (io/slurp "package.json")) :keywordize-keys true)))
-
 (def version-string
-  (get-version))
+  "0.1.8")
