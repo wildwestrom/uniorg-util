@@ -6,10 +6,22 @@ Outputs to both JSON and EDN formats.
 
 It relies heavily on [[https://github.com/rasendubi][rasendubi]]'s very accurate Org Mode parser, *[[https://github.com/rasendubi/uniorg][uniorg]]*.
 
+** Installation:
+
+   Install with npm.
+   #+begin_src shell
+   npm install uniorg-util
+   #+end_src
+
+   Or install with yarn.
+   #+begin_src shell
+   yarn add uniorg-util
+   #+end_src
+
 ** Usage:
    Outputs JSON by default.
    #+begin_src shell
-   node main.js [OPTIONS]
+   uniorg-util [OPTIONS]
    #+end_src
 
    By default it will process everything in the current directory.
@@ -71,17 +83,9 @@ It relies heavily on [[https://github.com/rasendubi][rasendubi]]'s very accurate
     #+end_src
 
 
-** DOING In Progress [60%]
-- [X] TODO Figure out CI/CD.\\
-  This project should test before committing or accepting pull requests.\\
-  This project should also build, test, and deploy to npm on commit.
-- [X] TODO Prevent filename collision.\\
-  Now all it does is use the input filename. Same directory filename collisions on the OS level are not possible (at least I don't think they are).
-- [X] DONE Make into a polished command line tool.\\
-    CLOSED: [2021-06-20 Sun 22:49]
-- [ ] TODO Create release on Github.
-- [ ] TODO Publish on NPM.\\
-  I'd like to just do ~npm install uniorg-util~ and ~uniorg-util -i [in-dir] -o [out-dir]~.
+** TODO:
+- [ ] Automate publishing, releasing, and versioning.
+- [ ] Figure out why I can't run the tool after installing.
 
 
 ** Development:
