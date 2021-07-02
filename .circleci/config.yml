@@ -93,7 +93,3 @@ workflows:
     jobs:
       - build
       - test
-      - publish-github-release:
-          requires:
-            - test
-            - build
