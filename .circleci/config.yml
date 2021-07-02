@@ -88,21 +88,6 @@ jobs:
       - store_artifacts:
           path: ~/repo/out/node-tests.js
 
-  publish-github-release:
-    docker:
-      - image: circleci/node:latest
-    working_directory: ~/
-    steps:
-      - attach_workspace:
-          at: ~/
-      - run:
-          name: "Publish Release on GitHub"
-          command: |
-            cd repo
-            yarn install
-            VERSION=$(node out/main.js --version)
-            ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${VERSION} ./artifacts/
-
 workflows:
   build:
     jobs:
@@ -112,7 +97,3 @@ workflows:
           requires:
             - test
             - build
-      # - publish-to-npm:
-      #     requires:
-      #       - test
-      #       - build
