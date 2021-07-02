@@ -95,6 +95,16 @@ It relies heavily on [[https://github.com/rasendubi][rasendubi]]'s very accurate
    yarn install
    #+end_src
 
+   Run a repl with tests:
+   #+begin_src shell
+   yarn watch:test
+   #+end_src
+
+   Run a repl without tests:
+   #+begin_src shell
+   yarn watch
+   #+end_src
+
    Build the script:
    #+begin_src shell
    yarn build
