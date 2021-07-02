@@ -84,9 +84,8 @@ It relies heavily on [[https://github.com/rasendubi][rasendubi]]'s very accurate
 
 
 ** TODO:
-- [ ] Automate publishing, releasing, and versioning.
-- [ ] Figure out why I can't run the tool after installing.
-
+- [X] Figure out why I can't run the tool after installing.
+- [ ] Automate pushing releases.
 
 ** Development:
 
