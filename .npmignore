@@ -13,4 +13,6 @@ json-data/
 edn-data/
 test-output/
 
+dist/node-tests.js
+
 .DS_Store

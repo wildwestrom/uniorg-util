@@ -5,10 +5,6 @@
     "bin": {
         "uniorg-util": "./dist/main.js"
     },
-    "np": {
-        "yarn": true,
-        "contents": "dist"
-    },
     "scripts": {
         "build": "shadow-cljs release script",
         "test": "shadow-cljs compile test --config-merge \"{:autorun false}\" && node dist/node-tests.js",
