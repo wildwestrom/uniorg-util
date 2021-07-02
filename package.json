@@ -12,14 +12,14 @@
         "watch": "shadow-cljs watch script"
     },
     "devDependencies": {
-        "shadow-cljs": "2.14.5"
+        "shadow-cljs": "2.14.6"
     },
     "dependencies": {
         "rehype-stringify": "^8.0.0",
         "unified": "^9.2.1",
-        "uniorg-extract-keywords": "^0.2.1",
-        "uniorg-parse": "^0.2.1",
-        "uniorg-rehype": "^0.2.3"
+        "uniorg-extract-keywords": "^0.3.0",
+        "uniorg-parse": "^0.3.0",
+        "uniorg-rehype": "^0.3.0"
     },
     "name": "uniorg-util",
     "description": "Convert org-documents to html+metadata.",
