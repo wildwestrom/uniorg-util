@@ -9,7 +9,8 @@
         "build": "shadow-cljs release script",
         "test": "shadow-cljs compile test --config-merge \"{:autorun false}\" && node dist/node-tests.js",
         "watch:test": "shadow-cljs watch test",
-        "watch": "shadow-cljs watch script"
+        "watch": "shadow-cljs watch script",
+        "release": "yarn build && np"
     },
     "devDependencies": {
         "shadow-cljs": "2.14.6"
