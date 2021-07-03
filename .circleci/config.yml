@@ -49,12 +49,12 @@ jobs:
           key: 'node-{{ checksum "yarn.lock" }}'
 
       - store_artifacts:
-          path: ~/repo/out/main.js
+          path: ~/repo/dist/main.js
 
       - persist_to_workspace:
           root: ~/
           paths:
-            - repo/out
+            - repo/dist
 
   test:
     docker:
@@ -86,7 +86,7 @@ jobs:
           command: yarn test
 
       - store_artifacts:
-          path: ~/repo/out/node-tests.js
+          path: ~/repo/dist/node-tests.js
 
 workflows:
   build:
