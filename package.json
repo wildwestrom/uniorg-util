@@ -13,7 +13,7 @@
         "release": "yarn build && np"
     },
     "devDependencies": {
-        "shadow-cljs": "2.14.6"
+        "shadow-cljs": "2.15.1"
     },
     "dependencies": {
         "rehype-stringify": "^8.0.0",
