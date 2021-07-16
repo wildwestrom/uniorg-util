@@ -8,13 +8,16 @@
 (def test-in-dir "test-posts")
 (def test-out-dir "test-output")
 
-(defn cleanup
+(defn clean-dir
   [path]
   (when (fs/dir? path)
     (fs/rm-r path)))
 
+(defn cleanup []
+  (clean-dir test-out-dir))
+
 ;; Pre-clean before starting tests, just in case.
-(cleanup test-out-dir)
+(cleanup)
 
 (deftest remove-extension
   (is (= (h/remove-extension "~/.config/README.org") "README")))
@@ -56,7 +59,7 @@
     (testing (str "when \"-e\" " is-or-not "used, output to `" ext "`.")
       (is (test-type (h/filter-ext dirs ext)
                      dirs))))
-  (cleanup test-out-dir))
+  (cleanup))
 
 (deftest file-extensions
   (file-ext-test nil '=    ".json")
@@ -70,4 +73,4 @@
       (sut/-main "-i" test-in-dir "-o" test-out-dir)
       (is (= (count (h/files-in-dir test-in-dir))
              (count (h/files-in-dir test-out-dir))))
-      (cleanup test-out-dir))))
+      (cleanup))))
