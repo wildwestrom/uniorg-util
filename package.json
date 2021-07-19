@@ -1,7 +1,7 @@
 {
     "license": "GPL-3.0-or-later",
     "version": "0.2.0",
-    "preferGlobal": true,
+    "preferGlobal": false,
     "bin": {
         "uniorg-util": "./dist/main.js"
     },
