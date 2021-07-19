@@ -1,9 +1,8 @@
 (ns uniorg-util.cli
-  (:require
-   [clojure.tools.cli :refer [parse-opts]]
-   [clojure.string :as string]
-   [uniorg-util.helpers :refer [version-string]]
-   [cljs-node-io.fs :as fs]))
+  (:require [clojure.tools.cli :refer [parse-opts]]
+            [clojure.string :as string]
+            [uniorg-util.helpers :refer [version-string]]
+            [cljs-node-io.fs :as fs]))
 
 (def ^:private cli-options
   [["-i" "--input [DIR]" "Directory to read from"

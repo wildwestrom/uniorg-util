@@ -1,11 +1,8 @@
 (ns uniorg-util.cli-test
-  (:require
-   [clojure.tools.cli :refer [parse-opts]]
-   [cljs-node-io.fs :as fs]
-   [uniorg-util.cli :as sut]
-   [uniorg-util.helpers :refer [version-string]]
-   [cljs.test :refer-macros [deftest testing is]]
-   [clojure.string :as string]))
+  (:require [clojure.tools.cli :refer [parse-opts]]
+            [uniorg-util.cli :as sut]
+            [uniorg-util.helpers :refer [version-string]]
+            [cljs.test :refer-macros [deftest testing is]]))
 
 (defn options-test
   [& opts]
@@ -30,14 +27,13 @@
     (is (not (nil?    (errors-test "-m"))))
     (is (not (nil?    (errors-test "--manifest"))))
     (is (= "filename" (:manifest (options-test "-m" "filename"))))
-    (is (= "filename" (:manifest (options-test "--manifest" "filename"))))
-    (is (= "filename" (:manifest (options-test "--edn" "--manifest" "filename"))))))
+    (is (= "filename" (:manifest (options-test "--manifest" "filename"))))))
 
 (deftest input-output
   (testing "Make sure input/output works\n"
     (testing "Give errors on invalid input dir:"
-      (is (not (nil? (errors-test "-i" "directory"))))
-      (is (not (nil? (errors-test "--input" "directory")))))
+      (is (not (nil? (errors-test "-i" "this-directory-does-not-exist"))))
+      (is (not (nil? (errors-test "--input" "this-directory-does-not-exist")))))
     (testing "Return path on correct input dir:"
       (is (= "."          (:input  (options-test nil))))
       (is (= "test-posts" (:input  (options-test "-i" "test-posts"))))

@@ -1,6 +1,5 @@
 (ns uniorg-util.helpers
   (:require [cljs-node-io.fs :as fs]
-            [cljs-node-io.core :as io]
             [clojure.string :as string]))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -13,11 +12,9 @@
   [path]
   (map #(str path "/" %) (fs/readdir path)))
 
-
 (defn filter-ext
   [files ext]
-  (filter #(-> % fs/ext (= ext))
-          files))
+  (filter #(-> % fs/ext (= ext)) files))
 
 (defn remove-extension
   [file]
