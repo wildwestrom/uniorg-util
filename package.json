@@ -15,6 +15,7 @@
         "shadow-cljs": "2.15.1"
     },
     "dependencies": {
+        "rehype-raw": "^5.1.0",
         "rehype-stringify": "^8.0.0",
         "unified": "^9.2.1",
         "uniorg-extract-keywords": "^0.3.0",

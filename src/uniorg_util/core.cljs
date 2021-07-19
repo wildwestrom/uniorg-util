@@ -3,6 +3,7 @@
             ["rehype-stringify" :as html]
             ["uniorg-parse" :as uniorg]
             ["uniorg-rehype" :as rehype]
+            ["rehype-raw" :as raw]
             ["uniorg-extract-keywords" :refer (extractKeywords)]
             [cljs-node-io.core :as io :refer [slurp spit]]
             [cljs-node-io.fs :as fs]
@@ -15,6 +16,7 @@
     (.use uniorg)
     (.use extractKeywords)
     (.use rehype)
+    (.use raw)
     (.use html)))
 
 (defn process-org
